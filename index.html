@@ -40,30 +40,46 @@
       z-index: 1000;
     }
 
-    nav h2 {
+    .menu-toggle {
+      display: none;
+      font-size: 1.6rem;
       color: #fff;
-      font-size: 1.3rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      cursor: pointer;
     }
 
-    .nav-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-      object-fit: cover;
-    }
-
-    nav a {
+    .nav-links a {
       color: #ccd6f6;
       text-decoration: none;
       margin-left: 20px;
       font-size: 0.9rem;
     }
 
-    nav a:hover {
+    .nav-links a:hover {
       color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--primary);
+        margin-top: 15px;
+        padding: 10px 0;
+      }
+
+      .nav-links a {
+        margin: 10px 0;
+        padding: 10px 5%;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
     }
 
     /* ---------- HERO ---------- */
@@ -96,13 +112,20 @@
     .btn {
       display: inline-block;
       padding: 12px 25px;
-      background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--accent);
+      background: #2563eb; /* NEW BLUE COLOR */
+      border: 2px solid #2563eb;
+      color: #ffffff;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 6px;
       margin-right: 15px;
       font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #1e40af;
+      border-color: #1e40af;
+      color: #ffffff;
     }
 
     .btn:hover {
@@ -182,11 +205,84 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 768px) {
+      nav {
+        flex-direction: row;
+        align-items: center;
+        padding: 15px 5%;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--primary);
+        margin-top: 15px;
+        padding: 10px 0;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
       header {
+        padding: 40px 5%;
+        min-height: auto;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr !important;
         text-align: center;
       }
-      nav {
-        flex-direction: column;
+
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-content h3 {
+        font-size: 1.1rem;
+      }
+
+      .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      section {
+        padding: 60px 5%;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flip-card {
+        width: 200px;
+        height: 250px;
+      }
+
+      .flip-card:hover .flip-inner {
+        transform: none;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .nav-links {
+        display: flex !important;
+        flex-direction: row;
+      }
+
+      .hero-content {
+        grid-template-columns: 1.2fr 0.8fr;
+        text-align: left;
       }
     }
   /* ---------- FLIP PHOTO ---------- */
@@ -317,13 +413,14 @@
 <!-- NAVBAR -->
 <nav>
   <h2>Rachan&nbsp;K&nbsp;M</h2>
-  <div>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#certificates">Certificates</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#skills" onclick="closeMenu()">Skills</a>
+    <a href="#projects" onclick="closeMenu()">Projects</a>
+    <a href="#certificates" onclick="closeMenu()">Certificates</a>
+    <a href="#education" onclick="closeMenu()">Education</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
   </div>
 </nav>
 
@@ -348,7 +445,7 @@
       <div class="flip-card" onclick="openProfileModal()" style="cursor:pointer;">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/ChatGPT%20Image%20Dec%2031,%202025,%2010_08_13%20AM.png" alt="Rachan K M">
+            <img loading="lazy" decoding="async" src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/ChatGPT%20Image%20Dec%2031,%202025,%2010_08_13%20AM.png" alt="Rachan K M">
           </div>
           <div class="flip-back">
             <h3>Rachan K M</h3>
@@ -469,7 +566,7 @@
 
     <div class="card">
       <div class="cert-img-wrapper" onclick="openModal('https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM.jpeg')">
-        <img src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM.jpeg" alt="Web Development Fundamentals Certificate">
+        <img loading="lazy" decoding="async" src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM.jpeg" alt="Web Development Fundamentals Certificate">
         <div class="cert-overlay">Preview Certificate</div>
       </div>
       <h3>Web Development Fundamentals</h3>
@@ -479,7 +576,7 @@
 
     <div class="card">
       <div class="cert-img-wrapper" onclick="openModal('https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM%20%281%29.jpeg')">
-        <img src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM%20%281%29.jpeg" alt="Introduction to Cybersecurity Certificate">
+        <img loading="lazy" decoding="async" src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM%20%281%29.jpeg" alt="Introduction to Cybersecurity Certificate">
         <div class="cert-overlay">Preview Certificate</div>
       </div>
       <h3>Introduction to Cybersecurity</h3>
@@ -491,7 +588,7 @@
 
     <div class="card">
       <div class="cert-img-wrapper" onclick="openModal('https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM%20%282%29.jpeg')">
-        <img src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM%20%282%29.jpeg" alt="Android Application Development Certificate">
+        <img loading="lazy" decoding="async" src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.14.14%20PM%20%282%29.jpeg" alt="Android Application Development Certificate">
         <div class="cert-overlay">Preview Certificate</div>
       </div>
       <h3>Android Application Development Workshop</h3>
@@ -503,7 +600,7 @@
 
     <div class="card">
       <div class="cert-img-wrapper" onclick="openModal('https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.16.23%20PM.jpeg')">
-        <img src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.16.23%20PM.jpeg" alt="Artificial Intelligence Internship Certificate">
+        <img loading="lazy" decoding="async" src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/WhatsApp%20Image%202026-01-02%20at%205.16.23%20PM.jpeg" alt="Artificial Intelligence Internship Certificate">
         <div class="cert-overlay">Preview Certificate</div>
       </div>
       <h3>Artificial Intelligence Internship</h3>
@@ -557,7 +654,7 @@
 <div class="modal" id="profileModal" onclick="closeProfileModal()">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="close-modal" onclick="closeProfileModal()">&times;</span>
-    <img src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/ChatGPT%20Image%20Dec%2031,%202025,%2010_08_13%20AM.png" alt="Rachan K M - Profile Image">
+    <img loading="lazy" decoding="async" src="https://uploads.onecompiler.io/43wnsdn3b/449dp3j89/ChatGPT%20Image%20Dec%2031,%202025,%2010_08_13%20AM.png" alt="Rachan K M - Profile Image">
   </div>
 </div>
 
@@ -585,6 +682,13 @@
 
   function closeModal() {
     document.getElementById('certModal').style.display = 'none';
+  }
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+  }
+
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('active');
   }
 </script>
 
